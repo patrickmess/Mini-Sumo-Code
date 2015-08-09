@@ -191,9 +191,10 @@ void loop() {
             direction = Left;     //turn left when scanning begins
           else                  //if 1 is chosen
             direction = Right;    //turn right when scanning begins
+          //We have a direction chosen
+          changeState(Scanning);   //Begin Scanning to find opponet 
       }
-      //We have a direction chosen
-      changeState(Scanning);   //Begin Scanning to find opponet   
+  
   }
   //End DrivingF State (Driving Forward State) Code
 
@@ -250,9 +251,9 @@ void loop() {
             direction = Left;     //turn left when scanning begins
           else                  //if 1 is chosen
             direction = Right;    //turn right when scanning begins
-      }
-      //We have a direction chosen
-      changeState(Scanning);   //Begin Scanning to find opponet   
+          //We have a direction chosen
+          changeState(Scanning);   //Begin Scanning to find opponet 
+      }  
   }
   //End DrivingB State (Driving Backward State) Code
 
@@ -356,7 +357,9 @@ void borderDetected()
           sumo.Drive(80, 0);        //Forward-Pivot on the right side 
                                     //(Just the left wheels are moving forwards)    
       }
-      changeState(DrivingB);   //Drie forward away from the border
+      sumo.Drive(-85, -85);   //Drive Backward
+      delay(250);
+      changeState(DrivingB);   //Drive forward away from the border
   }
   
   else if(sumo.lightSensors[1] == true)   //The back-right light Sensor detects the border
@@ -370,7 +373,9 @@ void borderDetected()
           sumo.Drive(-80, 0);       //Backward-Pivot on the right side
                                     //(Just the left wheels are moving backwards)
       }
-      changeState(DrivingF);   //Drie backward away from the border
+      sumo.Drive(85, 85);   //Drive Backward
+      delay(250);
+      changeState(DrivingF);   //Drive backward away from the border
   }
   else if(sumo.lightSensors[2] == true)   //The back-left light Sensor detects the border
   {
@@ -383,7 +388,9 @@ void borderDetected()
           sumo.Drive(0, -80);       //Backward-Pivot on the left side
                                     //(Just the right wheels are moving backwards)
       }
-      changeState(DrivingF);   //Drie backward away from the border
+      sumo.Drive(85, 85);   //Drive Backward
+      delay(250);
+      changeState(DrivingF);   //Drive backward away from the border
   }
   else if(sumo.lightSensors[3] == true)   //The front-left light Sensor detects the border 
   {
@@ -396,7 +403,9 @@ void borderDetected()
           sumo.Drive(0, 80);          //Forward-Pivot on the left side 
                                       //(Just the right wheels are moving forwards)  
       }
-      changeState(DrivingB);     //Drie backward away from the border
+      sumo.Drive(-85, -85);   //Drive Backward
+      delay(250);
+      changeState(DrivingB);     //Drive backward away from the border
   }
 }
 //End of the borderDetected() function code
